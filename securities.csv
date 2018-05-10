@@ -1,4 +1,4 @@
-,Security,GICS Sector,Cash Ratio,Current Ratio,Earnings Before Interest and Tax,Gross Profit,Net Cash Flow,Quick Ratio
+ticker,security,sector,cashRatio,currentRatio,earningsBeforeInterestAndTax,grossProfit,netCashFlow,quickRatio
 AAL,American Airlines Group,Industrials,51,73,5496000000,29894000000,-604000000,67
 AAPL,Apple Inc.,Information Technology,52,111,72515000000,93626000000,7276000000,108
 ABT,Abbott Laboratories,Health Care,77,150,7331000000,18359000000,51000000,134
