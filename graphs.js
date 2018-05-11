@@ -9,6 +9,12 @@ function makeGraph(error, securitiesData) {
     let companyNameDim = ndx.dimension(dc.pluck("security"));
 
     let sectorDim = ndx.dimension(dc.pluck("sector"));
+    
+    let sector2Dim = ndx.dimension(dc.pluck("sector"));
+    
+    let sector3Dim = ndx.dimension(dc.pluck("sector"));
+    
+    let sector4Dim = ndx.dimension(dc.pluck("sector"));
 
     let cashDim = ndx.dimension(dc.pluck("cashRatio"));
 
@@ -20,30 +26,20 @@ function makeGraph(error, securitiesData) {
 
     let flowDim = ndx.dimension(dc.pluck("netCashFlow"));
 
-    //let quickDim = ndx.dimension(dc.pluck("quickRatio"));
+    let quickDim = ndx.dimension(dc.pluck("quickRatio"));
 
     // graphs -----------------------------------------------------------   
     // Sectors graph-------------------------------------------
     let industryGroup = sectorDim.group();
 
     dc.pieChart("#industrySplit")
-        .height(500)
-        .width(400)
-        .innerRadius(125)
-        .minAngleForLabel( [0.2])
-        .legend(dc.legend().x(175).y(185).itemHeight(9).gap(5))
+        .height(220)
+        .width(220)
+        .innerRadius(75)
+        .minAngleForLabel( [3])
+        .legend(dc.legend().x(70).y(57).itemHeight(9).gap(5))
         .dimension(sectorDim)
         .group(industryGroup);
-
-    // companies graph-------------------------------------------
-    // let securityGroup = companyNameDim.group();
-
-    // dc.pieChart("#companySplit")
-    //     .height(400)
-    //     .width(400)
-    //     .innerRadius(120)
-    //     .dimension(companyNameDim)
-    //     .group(securityGroup);
 
     //chart sector against cash ratio-------------------------
     let cashGroup = sectorDim.group().reduce(
@@ -72,15 +68,15 @@ function makeGraph(error, securitiesData) {
 
     dc.barChart("#sectorCashSplit")
         .height(300)
-        .width(1000)
-        .dimension(sectorDim)
+        .width(400)
+        .dimension(sector2Dim)
         .group(cashGroup)
         .valueAccessor(function(p) {
             return p.value.average;
         })
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
-        .xAxisLabel("Industries")
+        .yAxisLabel("Cash Ratio")
         .yAxis().ticks(5);
 
     // sector against current ratio-------------------------
@@ -111,15 +107,15 @@ function makeGraph(error, securitiesData) {
 
     dc.barChart("#sectorCurrentSplit")
         .height(300)
-        .width(1000)
-        .dimension(sectorDim)
+        .width(400)
+        .dimension(sector3Dim)
         .group(currentGroup)
         .valueAccessor(function(p) {
             return p.value.average;
         })
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
-        .xAxisLabel("Industries")
+        .yAxisLabel("Current Ratio")
         .yAxis().ticks(5);
         
    // earnings by sector----------------------------------------     
@@ -149,15 +145,15 @@ function makeGraph(error, securitiesData) {
 
     dc.barChart("#earnings")
         .height(300)
-        .width(1000)
-        .dimension(sectorDim)
+        .width(400)
+        .dimension(sector4Dim)
         .group(earningsGroup)
         .valueAccessor(function(p) {
             return p.value.average;
         })
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
-        .xAxisLabel("Industries")
+        .yAxisLabel("EBIT")
         .yAxis().tickFormat(d3.format('e'));
   
 // top 10 gross profit companies----------------------------------------------------------------  
@@ -166,12 +162,13 @@ function makeGraph(error, securitiesData) {
     
     dc.rowChart("#profit")
     .height(300)
-    .width(800)
+    .width(400)
     .dimension(companyNameDim)
     .group(profitGroup)
     .cap(10)
     .othersGrouper(false)
-    .xAxis().ticks(4);
+    .xAxis().tickFormat(d3.format('e'));
+
     
 // top 10 ebit companies--------------------------------------------------------
 
@@ -179,17 +176,17 @@ function makeGraph(error, securitiesData) {
     
     dc.rowChart("#earningsTop10")
     .height(300)
-    .width(800)
+    .width(400)
     .dimension(companyNameDim)
     .group(profitGroup)
     .cap(10)
     .othersGrouper(false)
-    .xAxis().ticks(4);
+    .xAxis().tickFormat(d3.format('e'));
 
 
 // gross profit and ebit by company--------------------------------------------    
     
-    let companyDim = ndx.dimension(function(d){
+    let companyDim = ndx.dimension(function(d) {
         return [d.earningsBeforeInterestAndTax, d.grossProfit, d.security];
     });
     
@@ -197,9 +194,9 @@ function makeGraph(error, securitiesData) {
         
         
         dc.scatterPlot("#earningsProfit")
-            .width(800)
-            .height(450)
-            .margins({top:10, right:50, bottom:10, left:150})
+            .height(400)
+            .width(600)
+            .margins({top:10, right:50, bottom:50, left:150})
             .x(d3.scale.linear().domain([-19000000000, 100000000000]))
             .brushOn(false)
             .symbolSize(8)
@@ -215,9 +212,9 @@ function makeGraph(error, securitiesData) {
             
 // earnings and current ratio by company------------------------------
 
-    let quickDim = ndx.dimension(dc.pluck("quickRatio"));
+    let quick1Dim = ndx.dimension(dc.pluck("quickRatio"));
 
-    let companyEarningsQuickDim = ndx.dimension(function(d){
+    let companyEarningsQuickDim = ndx.dimension(function(d) {
         return [d.quickRatio, d.earningsBeforeInterestAndTax, d.security];
     });
     
@@ -225,11 +222,10 @@ function makeGraph(error, securitiesData) {
         
         
         dc.scatterPlot("#earningsQuick")
-            .width(800)
-            .height(450)
-            .margins({top:10, right:50, bottom:10, left:150})
-            .x(d3.scale.linear().domain([0, 200]))
-            .y(d3.scale.linear().domain([-19000000000, 100000000000]))
+            .height(400)
+            .width(550)
+            .margins({top:10, right:50, bottom:50, left:150})
+            .x(d3.scale.linear().domain([0, 250]))
             .brushOn(false)
             .symbolSize(8)
             .clipPadding(10)
@@ -239,8 +235,8 @@ function makeGraph(error, securitiesData) {
                 return d.key[2]
             })
             .dimension(companyEarningsQuickDim)
-            .group(earnQuickGroup);
-            //.xAxis().tickFormat(d3.format('e'));
+            .group(earnQuickGroup)
+            .yAxis().tickFormat(d3.format('e'));
 
     
 
