@@ -178,7 +178,7 @@ function makeGraph(error, securitiesData) {
     .height(300)
     .width(400)
     .dimension(companyNameDim)
-    .group(profitGroup)
+    .group(earningsTopGroup)
     .cap(10)
     .othersGrouper(false)
     .xAxis().tickFormat(d3.format('e'));
