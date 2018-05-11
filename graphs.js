@@ -223,7 +223,7 @@ function makeGraph(error, securitiesData) {
         
         dc.scatterPlot("#earningsQuick")
             .height(400)
-            .width(550)
+            .width(600)
             .margins({top:10, right:50, bottom:50, left:150})
             .x(d3.scale.linear().domain([0, 250]))
             .brushOn(false)
