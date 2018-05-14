@@ -42,7 +42,7 @@ function makeGraph(error, securitiesData) {
         .group(industryGroup);
 
     //chart sector against cash ratio-------------------------
-    let cashGroup = sectorDim.group().reduce(
+    let cashGroup = sector2Dim.group().reduce(
         function reduceAdd(p, v) {
             p.count++;
             p.total += +v.cashRatio;
@@ -69,6 +69,7 @@ function makeGraph(error, securitiesData) {
     dc.barChart("#sectorCashSplit")
         .height(300)
         .width(400)
+        .margins({top:0, right:20, bottom:70, left:50})
         .dimension(sector2Dim)
         .group(cashGroup)
         .valueAccessor(function(p) {
@@ -81,7 +82,7 @@ function makeGraph(error, securitiesData) {
 
     // sector against current ratio-------------------------
     
-    let currentGroup = sectorDim.group().reduce(
+    let currentGroup = sector3Dim.group().reduce(
         function reduceAdd(p, v) {
             p.count++;
             p.total += +v.currentRatio;
@@ -108,6 +109,7 @@ function makeGraph(error, securitiesData) {
     dc.barChart("#sectorCurrentSplit")
         .height(300)
         .width(400)
+        .margins({top:0, right:20, bottom:70, left:50})
         .dimension(sector3Dim)
         .group(currentGroup)
         .valueAccessor(function(p) {
@@ -119,7 +121,7 @@ function makeGraph(error, securitiesData) {
         .yAxis().ticks(5);
         
    // earnings by sector----------------------------------------     
-     let earningsGroup = sectorDim.group().reduce(
+     let earningsGroup = sector4Dim.group().reduce(
         function reduceAdd(p, v) {
             p.count++;
             p.total += +v.earningsBeforeInterestAndTax;
@@ -146,6 +148,7 @@ function makeGraph(error, securitiesData) {
     dc.barChart("#earnings")
         .height(300)
         .width(400)
+        .margins({top:0, right:20, bottom:70, left:50})
         .dimension(sector4Dim)
         .group(earningsGroup)
         .valueAccessor(function(p) {
