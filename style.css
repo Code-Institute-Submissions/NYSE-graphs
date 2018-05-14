@@ -44,6 +44,8 @@ header {
 
 button {
     color: black;
+    border: none;
+    border-radius: 3px;
     margin-top: 10px;
     margin-bottom: 10px;
     width: 200px;
@@ -54,8 +56,10 @@ button:hover {
 }
 
 .miguel {
-    background-color: #00000070;
+    background-color: #00000030;
     color: white;
-    width: 100%;
     font-weight: lighter;
+    padding: 5px;
+    width: 100%;
+    
 }
