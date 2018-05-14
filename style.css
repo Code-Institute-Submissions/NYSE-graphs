@@ -41,3 +41,8 @@ header {
     size: 2px;
 }
 
+
+#earningsProfit .x.axis text {
+   text-anchor: end !important;
+   transform: rotate(-45deg);
+}
