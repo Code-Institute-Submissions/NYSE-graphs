@@ -11,10 +11,6 @@ header {
     font-size: 25px;
 }
 
-main {
-    width: 100%;
-}
-
 #sectorCashSplit .x.axis text {
     text-anchor: end !important;
     transform: rotate(-45deg);
@@ -65,5 +61,3 @@ button:hover {
     padding: 5px;
     width: 100%;
 }
-
-@media 
