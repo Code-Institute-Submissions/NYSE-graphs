@@ -9,7 +9,10 @@ body {
 header {
     color: black;
     font-size: 25px;
-    
+}
+
+main {
+    width: 100%;
 }
 
 #sectorCashSplit .x.axis text {
@@ -61,5 +64,6 @@ button:hover {
     font-weight: lighter;
     padding: 5px;
     width: 100%;
-    
 }
+
+@media 
