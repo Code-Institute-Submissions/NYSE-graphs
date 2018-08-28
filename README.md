@@ -1,4 +1,4 @@
-# Your Project's Name
+# NYSE-Graphs
 
 This website displays a very specific selection of the the New York Stock Exchange companies' fundamentals in the form of graphs. It is intended to give a quick financial overview of the listed companies so that the user can make a quicker and better decision on investing funds on the companies in question. The graphs look at the industries the the companies are part of, the cash ratio, the current ratio, EBIT by industy, top 10 companies by EBIT, top 10 companies by GP, the GP to EBIT positioning in a scatter plot and finally the EBIT to quick ration location of the companies in a scatter plot. 
 
